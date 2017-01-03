@@ -7,9 +7,9 @@ namespace ShoeShop.Models
 {
     public class Cart
     {
-        public string ID { set; get; }
-        public string ID_Customer { set; get; }
-        public string Status { set; get; }
+        public int ID { set; get; }
+        public int ID_Customer { set; get; }
+        public int Status { set; get; }
         public DateTime CreatedDate { set; get; }
     }
 }

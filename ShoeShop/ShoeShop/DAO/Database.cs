@@ -13,6 +13,7 @@ namespace ShoeShop.DAO
     public class Database
     {
         private static Database instance { set; get; }
+
         private static object lockObj = new object();
 
         private SqlConnection connect { set; get; }
@@ -733,6 +734,55 @@ namespace ShoeShop.DAO
             catch
             {
                 throw;
+            }
+        }
+
+        public T GetCartByCartID<T>(int ID)
+        {
+            SqlDataReader reader = null;
+            List<CartDetail> list = new List<CartDetail>();
+            object result = null;
+            string query = "select* from dbo.Cart where ID_Cart = @id_cart";
+
+            try
+            {
+                connect.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.Add("@id_cart", SqlDbType.Int).Value = ID;
+
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new CartDetail()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Cart = (int)reader["ID_Cart"],
+                            ProductNumber = (int)reader["ProductNumber"],
+                            Price = (int)reader["Price"],
+                        });
+                    }
+                }
+
+                result = list.ToList();
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
             }
         }
     }

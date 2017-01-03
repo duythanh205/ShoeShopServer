@@ -19,4 +19,11 @@ namespace ShoeShop.Models
         TypeOfItem = 1,
         ColorOfItem = 2,
     }
+
+    public enum CartStatus
+    {
+        Pending = 1,
+        Done = 2,
+        Deleted = 3,
+    }
 }

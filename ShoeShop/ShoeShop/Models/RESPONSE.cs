@@ -51,4 +51,34 @@ namespace ShoeShop.Models
         public List<ItemResponse> ListItemResponse { set; get; }
         public ResStatusCode Code { set; get; }
     }
+
+    public class CartResponse
+    {
+        public Cart Cart { set; get; }
+        public List<CartDetail> ListCartDetail { set; get; }
+        public CartResponse()
+        {
+            ListCartDetail = new List<CartDetail>();
+        }
+        public CartResponse(Cart cart)
+        {
+            CartDAO cartDAO = new CartDAO();
+            try
+            {
+                Cart = cart;
+                ListCartDetail = cartDAO.GetCartByCartID<List<CartDetail>>(cart.ID);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+    }
+
+    public class GetCartResponse
+    {
+        public List<CartResponse> ListCartResponse { get; set; }
+        public ResStatusCode Code { set; get; }
+    }
 }
