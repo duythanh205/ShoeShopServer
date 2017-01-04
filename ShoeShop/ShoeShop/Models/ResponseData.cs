@@ -29,7 +29,6 @@ namespace ShoeShop.Models
         NotFoundItem = 502,
         BadRequest = 400,
 
-
         UNKNOW = -99999,
     }
 

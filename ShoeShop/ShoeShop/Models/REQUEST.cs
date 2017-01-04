@@ -72,4 +72,9 @@ namespace ShoeShop.Models
         public decimal MinPrice { set; get; }
         public decimal MaxPrice { set; get; }
     }
+
+    public class GetCartByIDRequest
+    {
+        public int ID { set; get; }
+    }
 }

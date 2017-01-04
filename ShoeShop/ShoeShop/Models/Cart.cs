@@ -9,7 +9,7 @@ namespace ShoeShop.Models
     {
         public int ID { set; get; }
         public int ID_Customer { set; get; }
-        public int Status { set; get; }
+        public string Status { set; get; }
         public DateTime CreatedDate { set; get; }
     }
 }

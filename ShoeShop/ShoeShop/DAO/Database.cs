@@ -553,7 +553,6 @@ namespace ShoeShop.DAO
             }
         }
 
-
         /// <summary>
         /// Tìm kiếm sản phẩm theo gía tiền
         /// </summary>
@@ -737,12 +736,152 @@ namespace ShoeShop.DAO
             }
         }
 
-        public T GetCartByCartID<T>(int ID)
+        public T GetCart<T>()
+        {
+            SqlDataReader reader = null;
+            object result = null;
+            string query = "select* from Cart";
+
+            try
+            {
+                connect.Open();
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result = (new Cart()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Customer = (int)reader["ID_Customer"],
+                            CreatedDate = (DateTime)reader["created_date"],
+                            Status = (string)reader["status"]
+                        });
+                    }
+                }
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+        }
+        public T GetCartDetail<T>()
         {
             SqlDataReader reader = null;
             List<CartDetail> list = new List<CartDetail>();
             object result = null;
-            string query = "select* from dbo.Cart where ID_Cart = @id_cart";
+            string query = "select* from CartDetail";
+
+            try
+            {
+                connect.Open();
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new CartDetail()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Cart = (int)reader["ID_Cart"],
+                            ID_Item = (int)reader["ID_Item"],
+                            ProductNumber = (int)reader["num"],
+                            Price = (int)reader["price"]
+                        });
+                    }
+                }
+
+                result = list.ToList();
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+        }
+
+        public T GetCartByCartID<T>(int ID)
+        {
+            SqlDataReader reader = null;
+            object result = null;
+            Cart newCart = null;
+            string query = "select* from dbo.Cart where ID = @id";
+
+            try
+            {
+                connect.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        newCart = (new Cart()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Customer = (int)reader["ID_Customer"],
+                            CreatedDate = (DateTime)reader["CreatedDate"],
+                            Status = reader["Status"].ToString(),
+                        });
+
+                        result = newCart;
+                    }
+                }
+
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+        }
+
+        public T GetCartDetailByCartID<T>(int ID)
+        {
+            SqlDataReader reader = null;
+            List<CartDetail> list = new List<CartDetail>();
+            object result = null;
+            CartDetail newCartDetail = null;
+            string query = "select* from dbo.CartDetail where ID_Cart = @id_cart";
 
             try
             {
@@ -755,13 +894,16 @@ namespace ShoeShop.DAO
                     reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        list.Add(new CartDetail()
+                        newCartDetail = new CartDetail()
                         {
                             ID = (int)reader["ID"],
                             ID_Cart = (int)reader["ID_Cart"],
+                            ID_Item = (int)reader["ID_Item"],
                             ProductNumber = (int)reader["ProductNumber"],
-                            Price = (int)reader["Price"],
-                        });
+                            Price = (int)reader["Price"]
+                        };
+
+                        list.Add(newCartDetail);
                     }
                 }
 

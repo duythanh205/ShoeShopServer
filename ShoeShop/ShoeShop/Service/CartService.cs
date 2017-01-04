@@ -9,30 +9,23 @@ namespace ShoeShop.Service
 {
     public class CartService
     {
-        internal GetCartResponse GetCartByCartID(int id)
+        CartDAO cartDAO = new CartDAO();
+        public GetCartResponse GetCartByCartID(int id)
         {
-            CartDAO cartDAO = new CartDAO();
-
+            CartResponse res = null;
             try
             {
-                var ListCarts = cartDAO.GetCartByCartID<List<Cart>>(id);
-                if (ListCarts != null && ListCarts.Count > 0)
-                {
-                    var res = ListCarts.Select(s => new CartResponse()
-                    {
-                        Cart = s,
-                        ListCartDetail = cartDAO.GetCartByCartID<List<CartDetail>>(id)
-                    }).ToList();
-
-                    return new GetCartResponse()
-                    {
-                        ListCartResponse = res
-                    };
-                }
+                var cart = cartDAO.GetDataFromTable<Cart>(TableType.Cart, id);
+                var listCartDetail = cartDAO.GetDataFromTable<List<CartDetail>>(TableType.CartDetail, id);
 
                 return new GetCartResponse()
                 {
-                    ListCartResponse = null
+                    cartResponse = new CartResponse()
+                    {
+                        Cart = cart,
+                        ListCartDetail = listCartDetail,
+                    },
+                    Code = ResStatusCode.Success
                 };
 
             }
@@ -41,5 +34,6 @@ namespace ShoeShop.Service
                 throw ex;
             }
         }
+        
     }
 }

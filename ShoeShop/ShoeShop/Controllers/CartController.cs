@@ -18,19 +18,21 @@ namespace ShoeShop.Controllers
         /// Xem sản phẩm có trong giỏ hàng
         /// </summary>
         /// <returns></returns>
-        //[Route("Api/Card/v1/{id}")]
-        //[HttpGet]
-        public HttpResponseMessage GetCardByCartID(int id)
+        [Route("Api/Cart/v1/GetCart/{id}")]
+        [HttpGet]
+        public HttpResponseMessage GetCartByCartID(int id)
         {
+            //int id = Convert.ToInt32(Convert.ToDouble(ID));
+
             try
             {
-                if(id.Equals(null) == true)
+                if(id < 0)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(ResStatusCode.BadRequest));
                 }
                
                 var result = CartService.GetCartByCartID(id);
-                return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(result.Code, result.ListCartResponse));
+                return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(result.Code, result.cartResponse));
             }
             catch 
             {

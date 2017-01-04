@@ -66,7 +66,7 @@ namespace ShoeShop.Models
             try
             {
                 Cart = cart;
-                ListCartDetail = cartDAO.GetCartByCartID<List<CartDetail>>(cart.ID);
+                ListCartDetail = cartDAO.GetDataFromTable<List<CartDetail>>(TableType.CartDetail, cart.ID);
             }
             catch
             {
@@ -78,7 +78,7 @@ namespace ShoeShop.Models
 
     public class GetCartResponse
     {
-        public List<CartResponse> ListCartResponse { get; set; }
+        public CartResponse cartResponse { get; set; }
         public ResStatusCode Code { set; get; }
     }
 }
