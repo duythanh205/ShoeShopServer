@@ -22,8 +22,6 @@ namespace ShoeShop.Controllers
         [HttpGet]
         public HttpResponseMessage GetCartByCartID(int id)
         {
-            //int id = Convert.ToInt32(Convert.ToDouble(ID));
-
             try
             {
                 if(id < 0)
@@ -32,6 +30,21 @@ namespace ShoeShop.Controllers
                 }
                
                 var result = CartService.GetCartByCartID(id);
+                return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(result.Code, result.cartResponse));
+            }
+            catch 
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(ResStatusCode.InternalServerError));
+            }
+        }
+
+        [Route("Api/Cart/v1/UpdateCart/{id}")]
+        [HttpPut]
+        public HttpResponseMessage UpdateCart(int id,[FromBody] string req)
+        {
+            try
+            {
+                var result = CartService.UpdateCart(id, req);
                 return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(result.Code, result.cartResponse));
             }
             catch 

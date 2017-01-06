@@ -34,6 +34,10 @@ namespace ShoeShop.Service
                 throw ex;
             }
         }
-        
+
+        internal object UpdateCart(int id, string req)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
