@@ -81,4 +81,8 @@ namespace ShoeShop.Models
         public CartResponse cartResponse { get; set; }
         public ResStatusCode Code { set; get; }
     }
+    public class UpdateCartResponse
+    {
+        public ResStatusCode Code { set; get; }
+    }
 }

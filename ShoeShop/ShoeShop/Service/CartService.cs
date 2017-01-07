@@ -35,8 +35,9 @@ namespace ShoeShop.Service
             }
         }
 
-        internal object UpdateCart(int id, string req)
+        public CartResponse UpdateCart(int id, UpdateCartRequest req)
         {
+
             throw new NotImplementedException();
         }
     }

@@ -40,12 +40,15 @@ namespace ShoeShop.Controllers
 
         [Route("Api/Cart/v1/UpdateCart/{id}")]
         [HttpPut]
-        public HttpResponseMessage UpdateCart(int id,[FromBody] string req)
+        public HttpResponseMessage UpdateCart(int id,[FromBody] UpdateCartRequest req)
         {
             try
             {
-                var result = CartService.UpdateCart(id, req);
-                return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(result.Code, result.cartResponse));
+                if(req.ValidData() == true)
+                {
+                    var result = CartService.UpdateCart(id, req);
+                    return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace());
+                }
             }
             catch 
             {

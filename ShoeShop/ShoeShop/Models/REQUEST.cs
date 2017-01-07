@@ -73,8 +73,26 @@ namespace ShoeShop.Models
         public decimal MaxPrice { set; get; }
     }
 
-    public class GetCartByIDRequest
+    public class UpdateCartRequest
     {
-        public int ID { set; get; }
+        public Cart cart { get; set; }
+        public List<CartDetail> ListCartDetail { get; set; }
+        public bool ValidData()
+        {
+            try
+            {
+                if (cart.ID < 0 || cart.ID_Customer < 0)
+                    return false;
+                if (string.IsNullOrEmpty(cart.Status))
+                    return false;
+                if (ListCartDetail == null || ListCartDetail.Count == 0)
+                    return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
