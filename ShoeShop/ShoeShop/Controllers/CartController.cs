@@ -47,8 +47,13 @@ namespace ShoeShop.Controllers
                 if(req.ValidData() == true)
                 {
                     var result = CartService.UpdateCart(id, req);
-                    return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace());
+                    return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(ResStatusCode.UpdateCartSucess, null));
                 }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, ResponseDataFactory.getInstace(ResStatusCode.BadRequest, null));
+                }
+
             }
             catch 
             {

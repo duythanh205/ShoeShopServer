@@ -711,6 +711,70 @@ namespace ShoeShop.DAO
             }
         }
 
+        public int UpdateCart(int ID, Cart req)
+        {
+           if (ID == -1)
+            {
+                string query = "insert into dbo.Cart values (@ID_Customer, @Status, @CreateDate)";
+                try
+                {
+                    connect.Open();
+                    using (SqlCommand command = new SqlCommand(query, connect))
+                    {
+                        //command.Parameters.AddWithValue("@ID", (int)req.ID);
+                        command.Parameters.Add("@ID_Customer", SqlDbType.Int).Value = (int)req.ID_Customer;
+                        command.Parameters.Add("@CreatDate", SqlDbType.DateTime).Value = req.CreatedDate;
+                        command.Parameters.Add("@Status", SqlDbType.NVarChar).Value = req.Status;
+
+                        ID = (int)command.ExecuteScalar();
+                    }
+
+                    return ID;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connect != null)
+                    {
+                        connect.Close();
+                    }
+                }
+            }
+           else
+            {
+                string query = "UPDATE Cart SET ID_Customer = @id_customer, CreateDate = @createDate, Status = @status WHERE ID = @id";
+                try
+                {
+                    connect.Open();
+                    using (SqlCommand command = new SqlCommand(query, connect))
+                    {
+                        //command.Parameters.AddWithValue("@ID", (int)req.ID);
+                        command.Parameters.Add("@id_customer", SqlDbType.Int).Value =(int)req.ID_Customer;
+                        command.Parameters.Add("@createDatea", SqlDbType.DateTime).Value = req.CreatedDate;
+                        command.Parameters.Add("@status", SqlDbType.NVarChar).Value = req.Status;
+                        
+                        ID = (int)command.ExecuteScalar();
+                    }
+                    return ID;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (connect != null)
+                    {
+                        connect.Close();
+                    }
+                }
+            }
+            
+        }
+
         private Item GetItemFromReader(SqlDataReader reader)
         {
             try
@@ -735,6 +799,7 @@ namespace ShoeShop.DAO
                 throw;
             }
         }
+   
 
         public T GetCart<T>()
         {

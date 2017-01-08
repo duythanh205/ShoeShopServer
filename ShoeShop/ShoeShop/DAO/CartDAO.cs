@@ -42,5 +42,16 @@ namespace ShoeShop.DAO
             }
         }
 
+        public int UpdateCart(int id, Cart req)
+        {
+            try
+            {
+                return Database.GetInstance().UpdateCart(id, req);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

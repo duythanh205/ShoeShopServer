@@ -35,10 +35,29 @@ namespace ShoeShop.Service
             }
         }
 
-        public CartResponse UpdateCart(int id, UpdateCartRequest req)
+        public UpdateCartResponse UpdateCart(int id, UpdateCartRequest req)
         {
 
-            throw new NotImplementedException();
+            try
+            {
+                int ID = cartDAO.UpdateCart(id,req.cart);
+                if (ID != -1 && ID > 0)
+                {
+                    return new UpdateCartResponse()
+                    {
+                        Code = ResStatusCode.UpdateCartSucess
+                    };
+                }
+
+                return new UpdateCartResponse()
+                {
+                    Code = ResStatusCode.UpdateCartFail
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
