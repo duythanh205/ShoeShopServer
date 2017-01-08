@@ -85,4 +85,34 @@ namespace ShoeShop.Models
     {
         public ResStatusCode Code { set; get; }
     }
+
+    public class OrderResponse
+    {
+        public Orders Order { set; get; }
+        public List<OrderDetail> ListOrderDetail { set; get; }
+        public OrderResponse()
+        {
+            ListOrderDetail = new List<OrderDetail>();
+        }
+        public OrderResponse(Orders order)
+        {
+            OrderDAO orderDAO = new OrderDAO();
+            try
+            {
+                Order = order;
+                ListOrderDetail = orderDAO.GetDataOrder<List<OrderDetail>>(TableType.OrderDetail, order.ID);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+    }
+
+    public class GetOrderResponse
+    {
+        public OrderResponse orderResponse { get; set; }
+        public ResStatusCode Code { set; get; }
+    }
 }

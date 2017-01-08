@@ -992,5 +992,115 @@ namespace ShoeShop.DAO
                 }
             }
         }
+
+        public T GetOrderByID<T>(int ID)
+        {
+            SqlDataReader reader = null;
+            object result = null;
+            Orders newOrder = null;
+            string query = "select* from dbo.Orders where ID = @id";
+
+            try
+            {
+                connect.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        newOrder = (new Orders()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Customer = (int)reader["ID_Customer"],
+                            CustomerName = reader["CustomerName"].ToString(),
+                            Address = reader["Address"].ToString(),
+                            Phone = reader["Phone"].ToString(),
+                            Status = reader["Status"].ToString(),
+                            CreatedDate = (DateTime)reader["CreatedDate"],                          
+                            EndDate = (DateTime)reader["EndDate"],
+                            Discount = (float)reader["Discount"],
+                            Note = reader["Note"].ToString(),
+                            TotalPrice = (decimal)reader["TotalPrice"],  
+                        });
+
+                        result = newOrder;
+                    }
+                }
+
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+        }
+
+        public T GetOrderDetailByID<T>(int ID)
+        {
+            SqlDataReader reader = null;
+            List<OrderDetail> list = new List<OrderDetail>();
+            object result = null;
+            OrderDetail newOrderDetail = null;
+            string query = "select* from dbo.OrdersDetail where ID_Order = @id_order";
+
+            try
+            {
+                connect.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, connect))
+                {
+                    cmd.Parameters.Add("@id_order", SqlDbType.Int).Value = ID;
+
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        newOrderDetail = new OrderDetail()
+                        {
+                            ID = (int)reader["ID"],
+                            ID_Order = (int)reader["ID_Order"],
+                            ID_Item = (int)reader["ID_Item"],
+                            NumberProduct = (int)reader["NumberProduct"],
+                            Price = (decimal)reader["Price"]
+                        };
+
+                        list.Add(newOrderDetail);
+                    }
+                }
+
+                result = list.ToList();
+                return (T)result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+        }
     }
 }

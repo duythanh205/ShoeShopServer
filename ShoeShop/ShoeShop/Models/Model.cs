@@ -13,7 +13,9 @@ namespace ShoeShop.Models
         ItemDetail = 2,
         ItemMeta = 3,
         Cart = 4,
-        CartDetail = 5
+        CartDetail = 5,
+        Order = 6,
+        OrderDetail = 7,
     }
 
     public enum CacheDataType
