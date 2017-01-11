@@ -100,11 +100,19 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -261,14 +269,20 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
+    <Compile Include="DAO\CartDAO.cs" />
     <Compile Include="DAO\DataAccess.cs" />
     <Compile Include="DAO\Database.cs" />
     <Compile Include="DAO\ItemDAO.cs" />
+    <Compile Include="DAO\MyAccountDAO.cs" />
+    <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\SystemDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,7 +309,10 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Service\AdminService.cs" />
+    <Compile Include="Service\CartService.cs" />
     <Compile Include="Service\ItemService.cs" />
+    <Compile Include="Service\MyAccountService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\SystemService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -347,6 +364,7 @@
     <Content Include="Message.json" />
     <Content Include="ItemType.json" />
     <Content Include="ItemColor.json" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>

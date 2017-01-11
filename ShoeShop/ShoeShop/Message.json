@@ -1,7 +1,8 @@
 {
   "500": "Có lỗi từ server",
   "501": "Thêm sản phẩm thất bại",
-  "502":  "Không tìm thấy sản phẩm",
+  "502": "Không tìm thấy sản phẩm",
+  "503": "Không đủ số lượng sản phẩm",
   "200": "Thành công",
   "201": "Thêm sản phẩm thành công.",
   "-99999": "Có lỗi trong quá trình xử lý. Vui lòng thực hiện lại.",

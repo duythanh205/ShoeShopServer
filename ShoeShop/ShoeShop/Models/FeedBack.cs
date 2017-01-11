@@ -7,7 +7,7 @@ namespace ShoeShop.Models
 {
     public class FeedBack
     {
-        public string ID { set; get; }
+        public int ID { set; get; }
         public string Email { set; get; }
         public DateTime CreatedDate { set; get; }
         public string Contents { set; get; }

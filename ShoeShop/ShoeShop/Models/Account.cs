@@ -7,7 +7,7 @@ namespace ShoeShop.Models
 {
     public class Account
     {
-        public string ID { set; get; }
+        public int ID { set; get; }
         public string Email { set; get; }
         public string Password { set; get; }
         public DateTime CreatedDate { set; get; }
@@ -16,5 +16,7 @@ namespace ShoeShop.Models
         public string FullName { set; get; }
         public string Address { set; get; }
         public string Phone { set; get; }
+        public string Token { set; get; }
+        public int ID_Cart { set; get; }
     }
 }

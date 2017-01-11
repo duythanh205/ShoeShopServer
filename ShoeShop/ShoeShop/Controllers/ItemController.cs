@@ -39,7 +39,7 @@ namespace ShoeShop.Controllers
 
                 GetItemByGenderTypeRequest req = new GetItemByGenderTypeRequest()
                 {
-                    Gender = (Sex)Enum.Parse(typeof(Sex), gender.ToUpper()),
+                    Gender = gender.ToUpper(),
                     Type = type,
                 };
 

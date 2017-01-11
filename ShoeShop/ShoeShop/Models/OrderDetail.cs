@@ -7,10 +7,11 @@ namespace ShoeShop.Models
 {
     public class OrderDetail
     {
-        public string ID { set; get; }
-        public string ID_Order { set; get; }
-        public string ID_Item { set; get; }
-        public string NumberProduct { set; get; }
+        public int ID { set; get; }
+        public int ID_Order { set; get; }
+        public int ID_Item { set; get; }
+        public int NumberProduct { set; get; }
         public decimal Price { set; get; }
+        public string Size { set; get; }
     }
 }

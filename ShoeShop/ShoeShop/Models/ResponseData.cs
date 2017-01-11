@@ -27,6 +27,7 @@ namespace ShoeShop.Models
         InternalServerError = 500,
         AddItemFail = 501,
         NotFoundItem = 502,
+        NotEnoughItem = 503,
         BadRequest = 400,
 
 

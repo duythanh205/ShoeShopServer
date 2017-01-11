@@ -78,7 +78,7 @@ namespace ShoeShop.Service
                     {
                         return new AddItemResponse()
                         {
-                            Code = ResStatusCode.AddItemSuccess
+                            Code = ResStatusCode.Success
                         };
                     }
 

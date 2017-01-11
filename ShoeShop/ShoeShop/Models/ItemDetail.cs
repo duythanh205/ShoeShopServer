@@ -9,7 +9,7 @@ namespace ShoeShop.Models
     {
         public int ID { set; get; }
         public int ID_Item { set; get; }
-        public int Size { set; get; }
+        public string Size { set; get; }
         public int NumberProduct { set; get; }
     }
 }

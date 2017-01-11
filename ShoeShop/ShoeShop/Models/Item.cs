@@ -11,17 +11,11 @@ namespace ShoeShop.Models
         public string ProductName { set; get; }
         public string Brand { set; get; }
         public string Color { set; get; }
-        public Sex Gender { set; get; }
+        public string Gender { set; get; }
         public string Status { set; get; }
         public string Type { set; get; }
         public DateTime CreatedDate { set; get; }
         public string Category { set; get; }
         public decimal Price { set; get; }
-    }
-
-    public enum Sex
-    {
-        MALE = 0,
-        FEMALE = 1
     }
 }
